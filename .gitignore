@@ -5,3 +5,6 @@
 .cache/
 build/
 compile_commands.json
+
+#binary files
+*.bin

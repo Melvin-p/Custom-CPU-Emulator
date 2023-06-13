@@ -1,29 +1,28 @@
-#include "CPU.hpp"
 #include <iostream>
 #include <fstream>
+#include <array>
+#include <string>
+#include "assembler.hpp"
 
 int main(int argc, char *argv[]) {
-    std::vector<int32_t> program;
-    int32_t size = 0;
     if (argc < 2) {
         std::cerr << "no file provided" "\n";
         exit(1);
     } else {
-        std::ifstream file(argv[1], std::ifstream::in | std::ifstream::binary);
+        std::ifstream file(argv[1], std::ios::in);
         if (file.is_open()) {
-            while (!file.eof()) {
-                file.read((char *) &size, sizeof(size));
-                program.push_back(size);
+            std::string s(argv[1]);
+            auto dot = s.find_last_of('.');
+            if (dot != std::string::npos) {
+                s = s.substr(0, dot);
             }
+            s += ".bin";
+            generate(file, s);
             file.close();
         } else {
             std::cerr << "can't open file" << "\n";
             exit(1);
         }
     }
-
-    CPU cpu(program);
-
-    cpu.run();
-
+    return 0;
 }

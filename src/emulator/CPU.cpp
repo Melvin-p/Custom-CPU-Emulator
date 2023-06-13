@@ -3,7 +3,7 @@
 
 //TODO logging
 
-[[maybe_unused]] CPU::CPU(std::vector<int32_t> program_data) : program(std::move(program_data)), registers() {
+[[maybe_unused]] CPU::CPU(std::vector<int32_t> program_data) : program(program_data), registers() {
     registers.fill(0);
 }
 
