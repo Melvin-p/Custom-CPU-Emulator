@@ -18,8 +18,8 @@ namespace tokens {
     constexpr std::array<char, 4> RTS{'R', 'T', 'S', 1};
     constexpr std::array<char, 4> STR{'S', 'T', 'R', 1};
     constexpr std::array<char, 4> NOP{'N', 'O', 'P', 0};
-    constexpr std::array<char, 3> IF{'I', 'F', 3};
-    constexpr std::array<char, 4> IFN{'I', 'F', 'N', 3};
+    constexpr std::array<char, 4> IFF{'I', 'F', 'F', 2};
+    constexpr std::array<char, 4> IFN{'I', 'F', 'N', 2};
     constexpr std::array<char, 4> MOV{'M', 'O', 'V', 2};
     constexpr std::array<char, 4> OUT{'O', 'U', 'T', 1};
 }
@@ -98,11 +98,11 @@ void generate(std::ifstream &file, const std::string &filename) {
             out.push_back(InstructionSet::ADD);
             std::cout << "\n";
             skip_whitespace(file);
-        } else if (std::equal(buffer.begin(), buffer.end() - 1, tokens::IF.begin(), tokens::IF.end() - 1)) {
-            std::cout << "IF ";
-            out.push_back(InstructionSet::IF);
+        } else if (std::equal(buffer.begin(), buffer.end(), tokens::IFF.begin(), tokens::IFF.end() - 1)) {
+            std::cout << "IFF ";
+            out.push_back(InstructionSet::IFF);
             skip_whitespace(file);
-            for (int i = 0; i < tokens::IF[2]; ++i) {
+            for (int i = 0; i < tokens::IFF[3]; ++i) {
                 out.push_back(read_digit(file));
                 skip_whitespace(file);
             }

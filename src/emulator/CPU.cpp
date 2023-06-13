@@ -105,21 +105,21 @@ void CPU::eval(int32_t instr) {
             registers[Registers::IP] += 2;
             break;
         }
-        case InstructionSet::IF: {
-            if (registers[program[registers[Registers::IP] + 1]] == program[registers[Registers::IP] + 2]) {
-                registers[Registers::IP] = program[registers[Registers::IP] + 3];
+        case InstructionSet::IFF: {
+            if (registers[Registers::C] == program[registers[Registers::IP] + 1]) {
+                registers[Registers::IP] = program[registers[Registers::IP] + 2];
                 is_jmp = true;
             } else {
-                registers[Registers::IP] += 3;
+                registers[Registers::IP] += 2;
             }
             break;
         }
         case InstructionSet::IFN: {
-            if (registers[program[registers[Registers::IP] + 1]] != program[registers[Registers::IP] + 2]) {
-                registers[Registers::IP] = program[registers[Registers::IP] + 3];
+            if (registers[Registers::C] != program[registers[Registers::IP] + 1]) {
+                registers[Registers::IP] = program[registers[Registers::IP] + 2];
                 is_jmp = true;
             } else {
-                registers[Registers::IP] += 3;
+                registers[Registers::IP] += 2;
             }
             break;
         }

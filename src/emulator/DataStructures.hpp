@@ -13,10 +13,10 @@ typedef enum {
     RTS, //Register to stack, push value from register to stack | 0x8 0x3
     STR, //Stack to register pop value from stack push to register | 0x9 0x3
     NOP, //No operation | 0xA
-    IF,  //If | 0xB 0x3 0x2
-    IFN, //If no | 0xc 0x3 0x2
+    IFF, //checks if value in accumulator is equal to input value if so jumps | 0xB 0x3 0x2
+    IFN, //checks if value in accumulator is not equal to input value if so jumps  | 0xc 0x3 0x2
     MOV, //Moves value copies value from first register to second | 0xD 0x2 0x3
-    OUT  //Pop stack and write to IO register | 0xE 0x6
+    OUT //Pop stack and write to IO register | 0xE 0x6
 } InstructionSet;
 
 typedef enum {
