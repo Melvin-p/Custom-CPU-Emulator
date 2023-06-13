@@ -123,6 +123,24 @@ void CPU::eval(int32_t instr) {
             }
             break;
         }
+        case InstructionSet::IFL: {
+            if (registers[Registers::C] < program[registers[Registers::IP] + 1]) {
+                registers[Registers::IP] = program[registers[Registers::IP] + 2];
+                is_jmp = true;
+            } else {
+                registers[Registers::IP] += 2;
+            }
+            break;
+        }
+        case InstructionSet::IFG: {
+            if (registers[Registers::C] > program[registers[Registers::IP] + 1]) {
+                registers[Registers::IP] = program[registers[Registers::IP] + 2];
+                is_jmp = true;
+            } else {
+                registers[Registers::IP] += 2;
+            }
+            break;
+        }
         case InstructionSet::STR: {
             if (!stack.empty()) {
                 int32_t value = stack.top();

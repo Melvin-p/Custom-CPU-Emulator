@@ -22,6 +22,8 @@ namespace tokens {
     constexpr std::array<char, 4> IFN{'I', 'F', 'N', 2};
     constexpr std::array<char, 4> MOV{'M', 'O', 'V', 2};
     constexpr std::array<char, 4> OUT{'O', 'U', 'T', 1};
+    constexpr std::array<char, 4> IFL{'I', 'F', 'L', 2};
+    constexpr std::array<char, 4> IFG{'I', 'F', 'G', 2};
 }
 
 uint64_t get_current_line(std::ifstream &file) {
@@ -113,6 +115,26 @@ void generate(std::ifstream &file, const std::string &filename) {
             out.push_back(InstructionSet::IFN);
             skip_whitespace(file);
             for (int i = 0; i < tokens::IFN[3]; ++i) {
+                out.push_back(read_digit(file));
+                skip_whitespace(file);
+            }
+            std::cout << "\n";
+            skip_whitespace(file);
+        } else if (std::equal(buffer.begin(), buffer.end(), tokens::IFL.begin(), tokens::IFL.end() - 1)) {
+            std::cout << "IFL ";
+            out.push_back(InstructionSet::IFL);
+            skip_whitespace(file);
+            for (int i = 0; i < tokens::IFL[3]; ++i) {
+                out.push_back(read_digit(file));
+                skip_whitespace(file);
+            }
+            std::cout << "\n";
+            skip_whitespace(file);
+        } else if (std::equal(buffer.begin(), buffer.end(), tokens::IFG.begin(), tokens::IFG.end() - 1)) {
+            std::cout << "IFG ";
+            out.push_back(InstructionSet::IFG);
+            skip_whitespace(file);
+            for (int i = 0; i < tokens::IFG[3]; ++i) {
                 out.push_back(read_digit(file));
                 skip_whitespace(file);
             }
