@@ -1,0 +1,7 @@
+#CLion OR Jetbrain
+.idea/
+
+#visual studio code
+.cache/
+build/
+compile_commands.json
